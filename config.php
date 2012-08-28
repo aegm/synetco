@@ -6,7 +6,7 @@ define('GRUPO_CLIENTE','2');
 /****************************************** CONFIGURACION GENERAL DEL SITIO *******************************************/
 /** cambia el root del apache. **/
 define('ROOT_DIR',dirname(__FILE__).'/');
-define('ROOT_URL','http://localhost/sytneco/');
+define('ROOT_URL','http://localhost/synet/');
 
 /** activa los tipos de erroes del servidor **/
 ini_set('error_report', E_ALL);
