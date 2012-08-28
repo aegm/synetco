@@ -1,0 +1,105 @@
+/* 
+    Document   : estilo
+    Created on : 12/08/2012, 11:47:13 AM
+    Author     : Carlos Castellanos
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body{
+    background-color: white;
+    color: white;
+    font-family:"Segoe UI", "Segoe UI Web Regular", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, "sans-serif";
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    overflow-x: hidden;
+    font-size: 88%;
+}
+
+h1{
+    font-size: 20px;
+}
+
+header{}
+
+header .topbar-wrapper {
+    width: 100%;
+    height: 40px;
+    background-color: #0072C6;
+}
+
+header .topbar {
+    width: 1024px;
+    height: 40px;
+    line-height:40px;
+    margin: 0 auto;
+}
+
+header .topbar nav{
+    float: left;
+}
+
+header .topbar nav ul{
+    width: 450px;
+    margin: 0px;
+    padding: 0px;
+    height: 40px;
+}
+
+header .topbar nav ul li{
+    display: inline-block;
+    list-style-type: none;
+    width: 25%;
+    text-align: center;
+    
+}
+
+header .topbar nav ul li:hover{background: #0369b2; cursor: pointer;}
+
+
+header .topbar nav ul li a{
+    color: white;
+    text-decoration: none;
+}
+
+.span1{width: 100px;}
+.span2{width: 200px;}
+.span8{width: 800px;}
+.span9{width: 1000px;}
+
+
+#contenedor{width: 100%;}
+
+#contenedor #contenido {
+    width: 100%; 
+    min-height:400px; 
+    margin: 0 auto;
+    color: black;
+}
+#contenedor #contenido article{margin: 0 auto; float: left; }
+
+article .post-content{
+    float: left;
+    margin-top:20%;
+}
+
+.post-content .logo {margin-left:  8%;}
+
+article .img-content{float: left; max-width: 60%; min-height: 305px; margin-top: 5%; margin-left: 30%}
+
+article .img-content .new_registro{
+    height: 100px; 
+    width: 100%; 
+    color: white; 
+    float: left;
+    background-color: #0072C6; 
+    text-align: center;}
+
+form{
+    margin:5%;
+}
