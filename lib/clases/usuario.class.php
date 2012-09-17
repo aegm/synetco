@@ -159,6 +159,7 @@ class usuario
                 while($consulta = $consultar->fetch_assoc())
                 {
                     $i++;
+                    $this->datos['encabezado'] = array("Cedula", "Nombre","Grupo", "estatus", "Correo");
                     $this->datos[$i] = $consulta;
                 }
                 $this->mensaje = "se han listado los datos correctamente";
