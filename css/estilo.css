@@ -25,7 +25,7 @@ h1{
     font-size: 20px;
 }
 
-header{ color: black; background-color:#F3F3F3; -webkit-box-shadow: 1px 1px 9px #ccc;   }
+header{ color: black; background-color:#FFDD15; -webkit-box-shadow: 1px 1px 9px #ccc;   }
 
 header .system{position: relative;  margin: 0 auto; text-align: center;  color: white; min-height: 70px;
 text-shadow:  #000 0.1em 0.1em 0.2em;    }
@@ -81,7 +81,7 @@ section {
 }
 section article{
     position: relative;
-    width: 100%;
+    width: 66%;
     float: left;
     color: black;
     margin-left: 2%;
@@ -116,19 +116,28 @@ article h1 { border-bottom: 1px solid #ddd; width: 96%;
 
 .titulo{text-shadow: #ccc 0.1em 0.2em 0.3em; }
 
-/*.article {margin-left: 2%; position:  relative;}*/
+.article {margin-left: 2%; position:  relative; width: 90%;}
 
-.control-grop{position: relative; margin: 1%; background: #ddd; width: 95%; min-height: 250px;}
+.producto{
+    width: 150px; height: 150px; cursor: pointer;-webkit-transition:.2s;-moz-transition:.2s; border: 2px solid black; margin: 1%;
+}
 
-.control-grop img{position:  relative; float: left; width: 195px; height: 200px; margin: 1%; background: #fff; cursor: pointer;
--webkit-transition:.2s;
-	-moz-transition:.2s;}
-
-.control-grop img:hover{
-	-webkit-transform:scale(1.1);
+.producto:hover{
+    -webkit-transform:scale(1.1);
 	-moz-transform:scale(1.1);
         border:2px solid #000;
 }
+/*.control-grop{position: relative; margin: 1%; background: #ddd; width: 95%; min-height: 250px;}
+
+.control-grop img{position:  relative; float: left; width: 195px; height: 190px; margin: 1.5%; background: #fff; cursor: pointer;-webkit-transition:.2s;-moz-transition:.2s;}
+
+.control-grop img:hover{
+	-webkit-transform:scale(1.0);
+	-moz-transform:scale(1.1);
+        border:2px solid #000;
+        
+        
+}*/
 form{
     margin:5%;
 }

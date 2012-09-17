@@ -6,9 +6,9 @@
  */
         session_start();
         /*************************Librerias Locales***********************************/
-        require_once '../lib/clases/usuario.class.php';
+        require_once '../lib/clases/reporte.class.php';
         /*************************Objetos Locales*************************************/
-        $usr = new usuario;
+        $reporte = new reporte;
 
         /*************************Encabezado******************************************/
         include_once 'head.php';
@@ -16,6 +16,7 @@
 
         /*************************variables de Matriz**********************************/
         $matriz['ROOT_URL'] = ROOT_URL;
+        $matriz['CSS'] .= incluir_lib(ROOT_URL."css/tabla.css");
         /************************Contenido*********************************************/
         //**ADICIONANDO EL ASIDE**********//
             $aside['CONTENIDO_ASIDE'] = '';
@@ -23,17 +24,49 @@
         //$aside['CONTENIDO_ASIDE'] = "Manten Actualizada la informacion de tus Usuarios  en este modulo podras agregar y actualizar la información necesario realacionadas a la opciones de usuarios";
             $aside['LISTA'] = $html->html("html/lista.html");
         $matriz['ASIDE'] = $html->HTML("html/aside.html",$aside);
-        //**CREANDo LA LISTA DE USUARIOS**//
-        $usr->lista();
-            if($usr->estatus)
+        //CREANDO UN LISTADO DE USUARIOS
+         //LISTANDO LAS NOTICIAS
+    $array['cabezas'] = "";
+    $array['registros'] = "";
+    $datos['tabla'] = "";
+    
+    $l = 100;
+    $tabla = "vusuarios";
+    $c = array("nombre","grupo","estado","correo");
+    $p = 1;
+    $id = "id";
+    
+    //realizando el calculo para diferenciar el comienzo de los encabezados
+    $inicial = $i = ($p-1)*$l;
+    $inicial++;
+		
+    $reporte->generar($tabla,$f,$o,$c,$l,$p,$id);
+    if($reporte->estatus)
+    {
+            $array['registros'] = "";
+            foreach($reporte->datos as $registro)
             {
-                foreach($usr->datos['encabezado'] as $enca)
-                {
-                    $array['ENCABEZADO'] .= $html->html("html/enca.html",array("cabezas"=>  str_replace ("_", " ", $enca)));
-                    
-                }
+                    $campos = "";
+                        $i++;
+                        foreach($registro as $campo => $valor)
+                        {
+                            $atributos = "";
+                            $formato = substr(strstr($campo, '..'), 2);
+                            $valor = formato($formato,$valor);
+                            
+                            if($i == $inicial)
+                            $array['cabezas'] .= $html->html("html/cabeza_tabla.html",array("cabeza"=>str_replace("..".extension($campo),"",$campo)));
+                            
+                            $campos .= $html->html("html/campo_tabla.html",array("campo"=>$valor,"atributos"=>$atributos));
+                        }
+                        if($i % 2 == 0)
+                                $clase = "bg_tabla";
+                        else
+                                $clase = "";
+                        $array['registros'] .= $html->html("html/lista_tabla.html",array("tabla"=>$tabla,"id"=>$registro['ID'],"i"=>$i,"campos"=>$campos,"clase"=>$clase));
             }
-        //*****************************//
+    }
+        
             
             
         $matriz['CONTENIDO'] = $html->html("html/$archivo.html",$array);
