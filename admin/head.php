@@ -36,11 +36,11 @@
                         {
                             $submenu['url'] = ROOT_URL.$submenu['url'];
                             //creamos el submenu
-                            $a_submenu .= $html->html("../html/submenu_item",$submenu);
+                            //$a_submenu .= $html->html("../html/submenu_item",$submenu);
                         }
                         
                     }
-                    $item['submenu'] = $html->html("../html/submenu.html",array("submenus"=>$a_submenu));
+                    //$item['submenu'] = $html->html("../html/submenu.html",array("submenus"=>$a_submenu));
                     $matriz['MENU'] .= $html->html("../html/menu.html",$item); 
                     
                 }else{

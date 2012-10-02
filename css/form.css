@@ -59,9 +59,6 @@ root {
 .form .for-submit{
 	margin:10px;
 }
-.form button[type="button"].btn {margin-left: 10px;} 
-.form button[type="reset"].btn {margin-left: 1%;} 
-
 .form span.for-info{
 	display:block;
 	padding-left:150px;
@@ -71,4 +68,3 @@ root {
 }
 .form .adicional{
 	margin:0px 0px 0px 10px;}
-

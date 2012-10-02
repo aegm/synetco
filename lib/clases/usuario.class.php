@@ -148,24 +148,17 @@ class usuario
 	public function lista($id)
         {
             if($id)
-                $completar_sql = "where vusuarios LIKE '$id%'";
+                $completar_sql = "where id = $id";
             $this->db = new db;
             $consultar = $this->db->query("select * from vusuarios $completar_sql");
             
            if($consultar->num_rows)
             {
-                $i = 0;
-                
-                while($consulta = $consultar->fetch_assoc())
-                {
-                    $i++;
-                    $this->datos['encabezado'] = array("Cedula", "Nombre","Grupo", "estatus", "Correo");
-                    $this->datos[$i] = $consulta;
-                }
-                $this->mensaje = "se han listado los datos correctamente";
-                $this->msgTipo = "Aviso";   
-                $this->estatus = true;
+                    $this->datos = $consultar->all();
+                    $this->mensaje = "se han listado los datos correctamente";
             }
+            $this->msgTipo = "ok";   
+            $this->estatus = true;
             $this->json = json_encode($this);
             return $this->estatus;
         }
@@ -242,10 +235,10 @@ class usuario
 		}
 	}
 	//***********************************************************************************************************
-	public function actualizar($tipo_usr,$estatus)
+	public function actualizar($tipo_usr,$estatus, $id)
 	{
             $this->db = new db;
-            $acualizar = $this->db->query("UPDATE usr_producto SET estatus = '$estatus', id_grupo ='$tipo_usr'");
+            $acualizar = $this->db->query("UPDATE usr_producto SET estatus = '$estatus', id_grupo ='$tipo_usr' where id = $id");
             {
                 $this->mensaje = "Se actualizo el perfil del usuario con exito";
                 $this->msgTipo = "aviso";
@@ -259,7 +252,7 @@ class usuario
 	public function activar($id_persona)
 	{
 		$this->db = new db;
-		$this->db->query("UPDATE usuarios SET estatus='1' WHERE id_persona='$id_persona'");
+		die("UPDATE usuarios SET estatus='1' WHERE id_persona='$id_persona'");
 		$this->mensaje="El usuario ha sido activado";
 		$this->msgTipo="ok";
 		$this->estatus = true;

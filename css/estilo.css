@@ -25,7 +25,7 @@ h1{
     font-size: 20px;
 }
 
-header{ color: black; background-color:#FFDD15; -webkit-box-shadow: 1px 1px 9px #ccc;   }
+header{ color: black; background-color:#0069BD; -webkit-box-shadow: 1px 1px 9px #ccc;   }
 
 header .system{position: relative;  margin: 0 auto; text-align: center;  color: white; min-height: 70px;
 text-shadow:  #000 0.1em 0.1em 0.2em;    }
@@ -81,7 +81,7 @@ section {
 }
 section article{
     position: relative;
-    width: 66%;
+    width: 60%;
     float: left;
     color: black;
     margin-left: 2%;
@@ -110,9 +110,10 @@ section article{
 .login .img_login { 
    margin-top:5%; margin-left:25%; float: left; width: 350px; height: 150px;
 }
-
-article h1 { border-bottom: 1px solid #ddd; width: 96%;
+article h1 { border-bottom: 1px solid #ddd; width: 100%;background: #ccc; color: white;
 }
+
+.foto_usr{ width: 180px; height: 150px; border: 1px dashed cornflowerblue; float: left; margin-left: 8%; }
 
 .titulo{text-shadow: #ccc 0.1em 0.2em 0.3em; }
 
@@ -138,10 +139,6 @@ article h1 { border-bottom: 1px solid #ddd; width: 96%;
         
         
 }*/
-form{
-    margin:5%;
-}
-
 
 
 .table{
@@ -212,3 +209,5 @@ footer p{
     margin: 5px;
     font-size: 90%;
 }
+
+.ocultar{display: none;}

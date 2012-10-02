@@ -28,18 +28,28 @@ require_once('dbi.result.class.php');
 //----------------------------------------------------------
 class cliente {
     protected $db;
+    public $estatus;
     public $datos = "";
     public $json = "";
     public function __construct() {
         $this->db = new db;
     }
-    public function listar()
+    public function listar($id)
     {
-        $consultar = $this->db->query("select * from clientes");
+        if (empty($id))
+            $completar_sql = "where id = $id";
+        
+        $consultar = $this->db->query("select * from clientes $completar_sql");
                 while($clie = $consultar->fetch_assoc())
                 {
                     $this->datos[] = $clie;
+                    $this->estatus = true;
                 }
+                
+                $this->json = json_encode($this);
+                return $this->estatus;
+                
+                
     }
 }
 //----------------------------------------------------------
