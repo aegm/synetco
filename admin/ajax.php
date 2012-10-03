@@ -32,6 +32,9 @@
                     $usr->lista($data);
                     echo $usr->json;
                     break;
+                case 'eliminar-usuario':
+                    echo "llego";
+                    break;
                 
                 
 	}

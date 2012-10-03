@@ -19,7 +19,7 @@ if(isset($_POST)&&count($_POST)){
 	switch($_POST['form']){
                 case 'actu-perfil':
                     $usr = new usuario;
-                    $usr->actualizar($tipo_usr, $estatus, $id);
+                    $usr->actualizar($tipo_usr, $estatus, $perfil);
                         $_SESSION['mensaje']=$usr->mensaje;
 			$_SESSION['msgTipo']=$usr->msgTipo;
 			$_SESSION['msgTitle']=$usr->msgTitle;

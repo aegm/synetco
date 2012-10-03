@@ -31,7 +31,7 @@
 	
 	/***************************************** MENSAJES GENERALES **********************************************/
 	
-        /*if(isset($_SESSION['mensaje']))
+        if(isset($_SESSION['mensaje']))
 	{
 		if($_SESSION['msgTipo']=="aviso")
 			$i['icon']="ui-icon-alert";
@@ -48,7 +48,7 @@
 		unset($_SESSION['mensaje']);
 		unset($_SESSION['msgTipo']);
 		unset($_SESSION['msgTitle']);
-	}*/
+	}
 	
 	/***************************************** ARCHIVOS CSS y JS *************************************************/
 	

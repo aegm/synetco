@@ -239,12 +239,13 @@ class usuario
 	{
             $this->db = new db;
             $acualizar = $this->db->query("UPDATE usr_producto SET estatus = '$estatus', id_grupo ='$tipo_usr' where id = $id");
-            {
+           if(!$this->db->errno){
+
                 $this->mensaje = "Se actualizo el perfil del usuario con exito";
-                $this->msgTipo = "aviso";
-                $this->estatus = true;  
+                $this->msgTipo = "ok";
+                $this->estatus = true;
+                $this->msgTitle = "Datos del Usuario";  
             }
-            $this->json = json_encode($this);
             return $this->estatus;
 	}
 	

@@ -54,3 +54,30 @@ function llenar_forma(item){
         });
         
 }
+
+function eliminar_forma(id){
+    var url = "ajax.php";
+    var data = id;
+        $.ajax({
+                type	: "GET",
+                cache	: false,
+                dataType: "json",
+                url     : url,
+                data	:'a=eliminar-usuario&nr_servicio='+data,
+                success: function(data) {
+                    if(data.estatus && data.msgTipo == "ok")
+                    {
+                        $(".mensaje").dialog({
+                          title:  data.msgTitle,
+                          buttons:{
+                              "ok":function(){
+                               location.reload();
+                              }
+                          }
+                        });
+                        $(".mensaje").attr("id",data.msgTipo);
+                        $(".mensaje").html('<p><span class="ui-icon ui-icon-circle-close" style="float:left; margin:0 7px 20px 0;"></span></p>'+data.mensaje).dialog('open');
+                    }
+                }
+        });
+}
