@@ -34,7 +34,7 @@
             $datos['tabla'] = "";
 
             $l = 100;
-            $tabla = "vusuarios";
+            $tabla = "productos";
             $c = array("nombre","grupo","correo");
             $p = 1;
             $id = "id";

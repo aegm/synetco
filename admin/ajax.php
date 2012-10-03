@@ -33,7 +33,9 @@
                     echo $usr->json;
                     break;
                 case 'eliminar-usuario':
-                    echo "llego";
+                    $usr = new usuario();
+                    $usr->eliminar($id);
+                     echo $usr->json;
                     break;
                 
                 

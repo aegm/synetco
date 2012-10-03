@@ -4,15 +4,38 @@
  */
 
 $(document).ready(function(){
+    $(function(){
+        //INICIALIZANDO LOS OPERADORES
+        var html = "<option value=''>Seleccione</option>";
+            html += "<option value=\'id\'>Id</option>";
+            html += "<option value=\'nombre\'>Nombre</option>";
+        $('#slt_filtro').html(html);    
+    });
+  $(function(){
+        //INICIALIZANDO LOS OPERADORES
+        var html = "<option value=''>Seleccione</option>";
+            html += "<option value=\'=\'>Igual</option>";
+            html += "<option value=\'<>\'>Diferente</option>";
+            html += "<option value=\'>=\'>Mayor Igual</option>"
+            html += "<option value=\'<=\'>Menor Igual</option>"
+            html += "<option value=\'LIKE\'>Como</option>"
+        $('#operadores').html(html);    
+    });
+ 
  //habilitando el formulario para agregar las noticias
     $('#btn_agregar').click(function(){
         habilita_form();
+    });
+    
+     
+    //FUNCION PARA ACTIVAR EL FILTRO Y SU BOTON DE BUSQUEDA
+    $("#btn_verificar").click(function(){
+          $("#frm_filtro").submit();
     });
 })
 
 function habilita_form(){
     $('#forma_perfil').animate({
-        left: '+=50',
         height: 'toggle'
         }, 1000, function() {
         // Animation complete.
@@ -63,7 +86,7 @@ function eliminar_forma(id){
                 cache	: false,
                 dataType: "json",
                 url     : url,
-                data	:'a=eliminar-usuario&nr_servicio='+data,
+                data	:'a=eliminar-usuario&id='+data,
                 success: function(data) {
                     if(data.estatus && data.msgTipo == "ok")
                     {

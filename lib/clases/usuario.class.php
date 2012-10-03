@@ -403,6 +403,26 @@ class usuario
 		}
 	}
         
+         public function eliminar($id){
+            $this->db = new db;
+            $query = "DELETE FROM usr_producto where id = '$id'";
+            $elimina = $this->db->query($query);
+            if(!$this->db->errno){
+                $this->mensaje = "Se Elimino el Registro Correctamente";
+                $this->msgTitle = "Datos del Usuario";
+                $this->msgTipo = "ok";
+                $this->estatus = true;
+            }else{
+                 $this->mensaje = "No se Pudo Actualizar los Registros";
+                 $this->msgTipo = "error";
+                 $this->msgTitle = "Datos del Usuario";
+                 $this->estatus = false;
+            }
+              $this->json = json_encode($this);
+            return $this->estatus;
+            
+        }
+        
 	//***********************************************************************************************************
 	public function session()
 	{
