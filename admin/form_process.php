@@ -9,6 +9,7 @@
 require_once('../config.php');
 require_once("../lib/funciones.php");
 require_once '../lib/clases/usuario.class.php';
+require_once '../lib/clases/producto.class.php';
 
 if(isset($_POST)&&count($_POST)){
 	$form_error = false;
@@ -26,7 +27,18 @@ if(isset($_POST)&&count($_POST)){
 
 			$error_redirect_to = 'cuentas.php';
 			$ty_redirect_to = 'cuentas.php';
-                    break;                
+                    break;  
+                case 'actu-producto':
+                    $pro = new producto();
+                    $pro->actualizar($producto, $text_pro);
+                        $_SESSION['mensaje']=$usr->mensaje;
+			$_SESSION['msgTipo']=$usr->msgTipo;
+			$_SESSION['msgTitle']=$usr->msgTitle;
+
+			$error_redirect_to = 'producto.php';
+			$ty_redirect_to = 'producto.php';
+                    break;
+                
                 default:
 			$_SESSION['mensaje'] = 'Formulario especificado no es válido. Póngase en contacto con nosotros si tiene alguna pregunta.';
 			$_SESSION['msgTipo']="error";

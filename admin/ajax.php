@@ -10,6 +10,7 @@
 	require_once("../lib/funciones.php");
 	require_once("../lib/clases/usuario.class.php");
         require_once '../lib/clases/clientes.class.php';
+        require_once '../lib/clases/producto.class.php';
         
 	$user = new usuario;
 	if(!$user->session())
@@ -36,6 +37,16 @@
                     $usr = new usuario();
                     $usr->eliminar($id);
                      echo $usr->json;
+                    break;
+                case 'buscar-producto':
+                    $pro = new producto;
+                    $pro->lista($data);
+                     echo $pro->json;
+                    break;
+                case 'eliminar-producto':
+                    $pro = new producto;
+                    $pro->eliminar($id);
+                    echo $pro->json;
                     break;
                 
                 

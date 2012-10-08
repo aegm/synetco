@@ -35,7 +35,7 @@
 
             $l = 100;
             $tabla = "productos";
-            $c = array("nombre","grupo","correo");
+            $c = array("nombre");
             $p = 1;
             $id = "id";
               if(isset($_GET) && count($_GET))
@@ -79,8 +79,8 @@
                     }
             }
         
-        $array['FORMULARIO_FILTRO']  = formulario_html("frm_filtro");    
-        $array['FORMULARIO']  = formulario_html("frm_perfil");    
+        $array['FORMULARIO_FILTRO']  = formulario_html("frm_fproducto");    
+        $array['FORMULARIO']  = formulario_html("frm_producto");    
         $matriz['CONTENIDO'] = $html->html("html/$archivo.html",$array);
         $matriz['footer'] = $html->html("../html/footer.html");
         /************************Impresion del Contenido***********************************/
