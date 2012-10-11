@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2012-10-02 16:37:05
+Date: 2012-10-11 16:58:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1166,8 +1166,11 @@ CREATE TABLE `formularios` (
 -- ----------------------------
 INSERT INTO `formularios` VALUES ('frm_categoria', 'Clientes Por Categoria', 'garantia.php', 'get', 'application/x-www-form-urlencoded', 'well form', 'cliente-categoria');
 INSERT INTO `formularios` VALUES ('frm_cof_basic', 'Configuracion Cliente', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'config-cliente');
+INSERT INTO `formularios` VALUES ('frm_filtro', 'Filtro de busqueda', 'cuentas.php', 'GET', 'application/x-www-form-urlencoded', 'form', 'form-filtro');
+INSERT INTO `formularios` VALUES ('frm_fproducto', 'Filtro de busqueda', 'producto.php', 'GET', 'application/x-www-form-urlencoded', 'form', 'form-filtro');
 INSERT INTO `formularios` VALUES ('frm_nsol', 'Nueva solicitud', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'n-sol');
 INSERT INTO `formularios` VALUES ('frm_perfil', 'Pefil del Usuario', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'perfil-usr');
+INSERT INTO `formularios` VALUES ('frm_producto', 'Agregar Producto', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'agrega-producto');
 INSERT INTO `formularios` VALUES ('frm_registro_usuario', 'Registro de usuario', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form ', 'registro-usuario1');
 INSERT INTO `formularios` VALUES ('frm_resp_sol', 'Repuesta a la Solicitud', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'resp-solicitud');
 
@@ -1188,11 +1191,13 @@ CREATE TABLE `formularios_adicional` (
   PRIMARY KEY (`id_adicional`),
   KEY `formularios_adicional-formulario_campos` (`id_campo`),
   CONSTRAINT `formularios_adicional_ibfk_1` FOREIGN KEY (`id_campo`) REFERENCES `formularios_campos` (`id_campo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of formularios_adicional
 -- ----------------------------
+INSERT INTO `formularios_adicional` VALUES ('1', '196', 'btn_verificar', 'button', '', 'gg-icon-buscar adicional', '', '0', '1');
+INSERT INTO `formularios_adicional` VALUES ('2', '208', 'btn_verificar', 'button', '', 'gg-icon-buscar adicional', '', '0', '1');
 
 -- ----------------------------
 -- Table structure for `formularios_botones`
@@ -1210,7 +1215,7 @@ CREATE TABLE `formularios_botones` (
   PRIMARY KEY (`id_boton`),
   KEY `fk_formulario_botones-formulario` (`id_formulario`) USING BTREE,
   CONSTRAINT `formularios_botones_ibfk_1` FOREIGN KEY (`id_formulario`) REFERENCES `formularios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of formularios_botones
@@ -1220,6 +1225,7 @@ INSERT INTO `formularios_botones` VALUES ('14', 'frm_registro_usuario', 'btn_reg
 INSERT INTO `formularios_botones` VALUES ('15', 'frm_registro_usuario', 'btn_borrar', 'reset', 'borrar', 'btn btn-danger', '0', '2');
 INSERT INTO `formularios_botones` VALUES ('16', 'frm_perfil', 'actualizar', 'submit', 'Actualizar', 'gg-button', '0', '1');
 INSERT INTO `formularios_botones` VALUES ('17', 'frm_nsol', 'btn_generar', 'button', 'Generar', 'btn btn-success', '0', '1');
+INSERT INTO `formularios_botones` VALUES ('18', 'frm_producto', 'actualizar', 'submit', 'Actualizar', 'gg-button', '0', '1');
 
 -- ----------------------------
 -- Table structure for `formularios_campos`
@@ -1245,7 +1251,7 @@ CREATE TABLE `formularios_campos` (
   PRIMARY KEY (`id_campo`),
   KEY `fk_formularios_campos-formulario` (`id_formulario`) USING BTREE,
   CONSTRAINT `fk_formularios_campos-formulario` FOREIGN KEY (`id_formulario`) REFERENCES `formularios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of formularios_campos
@@ -1273,6 +1279,17 @@ INSERT INTO `formularios_campos` VALUES ('34', 'frm_nsol', 'textarea', 'Solicitu
 INSERT INTO `formularios_campos` VALUES ('35', 'frm_nsol', 'select', 'Solicitudes', 'slt_prod', 'slt_prod', 'Prod. Asociado', '', ' ', ' ', '1', '0', '0', '4', '', '');
 INSERT INTO `formularios_campos` VALUES ('194', 'frm_registro_usuario', 'hidden', '', 'form', 'form', '', 'registro-usuario1', '', '', '0', '0', '0', '0', '', '');
 INSERT INTO `formularios_campos` VALUES ('195', 'frm_perfil', 'hidden', 'Datos Basicos', 'perfil', 'perfil', '', '', '', '', '0', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('196', 'frm_filtro', 'text', 'Filtro:', 'txt_valor', 'f[1][v]', 'Valor', '', 'text vobli', '', '1', '0', '0', '3', '', '');
+INSERT INTO `formularios_campos` VALUES ('197', 'frm_filtro', 'select', 'Filtro:', 'slt_filtro', 'f[1][c]', 'Filtro', '', 'text vobli', '', '1', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('198', 'frm_filtro', 'hidden', 'Filtro:', 'tabla', 'tabla', '', 'vusuarios', 'text', '', '0', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('199', 'frm_filtro', 'select', 'Filtro:', 'operadores', 'f[1][o]', 'Operador', '', 'text', '', '1', '0', '0', '2', '', '');
+INSERT INTO `formularios_campos` VALUES ('200', 'frm_producto', 'textarea', 'Nombre del Producto', 'text_pro', 'text_pro', 'Nombre del producto', '', 'text', ' ', '0', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('201', 'frm_producto', 'hidden', 'Nombre del Producto', 'producto', 'producto', '', '', 'text', '', '0', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('202', 'frm_producto', 'hidden', 'Generar Repuesta', 'form', 'form', ' ', 'actu-producto', ' ', ' ', '0', '0', '0', '2', ' ', ' ');
+INSERT INTO `formularios_campos` VALUES ('208', 'frm_fproducto', 'text', 'Filtro:', 'txt_valor', 'f[1][v]', 'Valor', '', 'text vobli', '', '1', '0', '0', '3', '', '');
+INSERT INTO `formularios_campos` VALUES ('209', 'frm_fproducto', 'select', 'Filtro:', 'slt_filtro', 'f[1][c]', 'Filtro', '', 'text vobli', '', '1', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('210', 'frm_fproducto', 'hidden', 'Filtro:', 'tabla', 'tabla', '', 'productos', 'text', '', '0', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('211', 'frm_fproducto', 'select', 'Filtro:', 'operadores', 'f[1][o]', 'Operador', '', 'text', '', '1', '0', '0', '2', '', '');
 
 -- ----------------------------
 -- Table structure for `gen_case`
@@ -1325,7 +1342,7 @@ INSERT INTO `menu` VALUES ('1', '1', 'menu_administracion', 'dropdown', 'Adminis
 INSERT INTO `menu` VALUES ('2', '1', 'menu_pro_clie', 'dropdown-menu', 'Administrar Productos', 'admin/garantia.php', '', '1', '1', '1');
 INSERT INTO `menu` VALUES ('3', '4', 'menu_salir', ' ', 'Salir', ' ', '', '3', '0', '1');
 INSERT INTO `menu` VALUES ('4', '1', 'menu_user', 'dropdown-menu', 'Administrar Usuarios', 'admin/user.php', '', '2', '1', '1');
-INSERT INTO `menu` VALUES ('5', '3', 'menu_cliente', 'dropdown', 'Cliente', '', '', '2', '0', '1');
+INSERT INTO `menu` VALUES ('5', '3', 'menu_cliente', 'dropdown', 'Cliente', 'admin/principal.php', '', '2', '0', '1');
 INSERT INTO `menu` VALUES ('6', '1', 'menu_casos', 'dropdown-menu', 'Casos de Garantia', 'admin/cliente.php', '', '1', '5', '1');
 
 -- ----------------------------
@@ -1354,7 +1371,6 @@ INSERT INTO `productos` VALUES ('10', 'EQUIPOS DE CONTROL DE ACCESO PEATONAL Y V
 INSERT INTO `productos` VALUES ('11', 'IMPRESORAS Y MATERIALES CONSUMIBLES PARA CARNETIZACION ');
 INSERT INTO `productos` VALUES ('12', 'SISTEMA DE ESTACIONAMIENTO PERFECT PARKING');
 INSERT INTO `productos` VALUES ('13', 'EQUIPOS DE CIRCUITO CERRADO DE TELEVICION');
-INSERT INTO `productos` VALUES ('14', 'IMPRESORAS FICALES Y GAVETAS DE DINERO');
 
 -- ----------------------------
 -- Table structure for `servicios`
@@ -1427,8 +1443,7 @@ CREATE TABLE `usr_producto` (
 -- ----------------------------
 -- Records of usr_producto
 -- ----------------------------
-INSERT INTO `usr_producto` VALUES ('1', '17030621', '1', '2012-07-01', '1', '1', 'ADMIN', '1234');
-INSERT INTO `usr_producto` VALUES ('2', '16800475', '1', '2012-07-01', '1', '1', 'mjcac', '1234');
+INSERT INTO `usr_producto` VALUES ('1', '17030621', '1', '2012-10-03', '1', '1', 'admin', '1234');
 
 -- ----------------------------
 -- Table structure for `usuarios_accesos`
