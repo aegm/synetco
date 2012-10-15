@@ -31,6 +31,7 @@ class cliente {
     public $estatus;
     public $datos = "";
     public $json = "";
+    
     public function __construct() {
         $this->db = new db;
     }
@@ -49,6 +50,33 @@ class cliente {
                 $this->json = json_encode($this);
                 return $this->estatus;
                 
+                
+    }
+    public function listarClientes()
+    {
+        $this->msgTitle="Usuario - buscar";
+		
+		if($limite)
+		$limite="LIMIT $limite";
+		$buscar = str_replace(" ","%",$buscar);
+                $lista = $this->db->query("SELECT * from vclientes");
+		if(!$lista->num_rows)
+		{
+			$this->mensaje = "No se encontraron registros...";
+			$this->msgTipo = "aviso";
+			$this->estatus = false;
+			$this->json = json_encode($this);
+			return $this->estatus;
+		}
+		while($item=$lista->fetch_assoc())
+		{
+			$this->datos[]=$item;
+		}
+		$this->mensaje = "Se ha listado los registros correctamente...";
+		$this->msgTipo = "ok";
+		$this->estatus = true;
+		$this->json = json_encode($this);
+		return $this->estatus;
                 
     }
 }

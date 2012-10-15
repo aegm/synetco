@@ -11,10 +11,18 @@ root {
 }
 
 .form .externo{
-	 border: none;
-    margin: 0 auto;
-	 padding:0px;
-    width: 450px;
+        border: none;
+        margin: 0 auto;
+        padding:0px;
+        width: 450px;
+}
+
+#frm_nsol .externo{
+    width: 95%;
+}
+
+#frm_nsol .externo .interno p{
+    float: left;
 }
 .form .interno{
 	border-radius:6px;
@@ -45,6 +53,7 @@ root {
 	width:200px;
 	font-size:12px;
 	padding:3px;
+        float: left;
 }
 .form select{
 	padding:3px;

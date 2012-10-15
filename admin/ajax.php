@@ -48,7 +48,12 @@
                     $pro->eliminar($id);
                     echo $pro->json;
                     break;
-                
+                case 'buscar-clie-sol':
+                    $clientes = new cliente;
+                    $clientes->listarClientes($id);
+                    echo $clientes->json;
+                    break;
+               
                 
 	}
 ?>
