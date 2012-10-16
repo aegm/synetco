@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2012-10-11 16:58:42
+Date: 2012-10-16 16:11:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1171,6 +1171,7 @@ INSERT INTO `formularios` VALUES ('frm_fproducto', 'Filtro de busqueda', 'produc
 INSERT INTO `formularios` VALUES ('frm_nsol', 'Nueva solicitud', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'n-sol');
 INSERT INTO `formularios` VALUES ('frm_perfil', 'Pefil del Usuario', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'perfil-usr');
 INSERT INTO `formularios` VALUES ('frm_producto', 'Agregar Producto', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'agrega-producto');
+INSERT INTO `formularios` VALUES ('frm_psol', 'Procesar solicitud', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'p-sol');
 INSERT INTO `formularios` VALUES ('frm_registro_usuario', 'Registro de usuario', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form ', 'registro-usuario1');
 INSERT INTO `formularios` VALUES ('frm_resp_sol', 'Repuesta a la Solicitud', 'form_process.php', 'post', 'application/x-www-form-urlencoded', 'form', 'resp-solicitud');
 
@@ -1215,17 +1216,18 @@ CREATE TABLE `formularios_botones` (
   PRIMARY KEY (`id_boton`),
   KEY `fk_formulario_botones-formulario` (`id_formulario`) USING BTREE,
   CONSTRAINT `formularios_botones_ibfk_1` FOREIGN KEY (`id_formulario`) REFERENCES `formularios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of formularios_botones
 -- ----------------------------
 INSERT INTO `formularios_botones` VALUES ('1', 'frm_resp_sol', 'guardar_resp', 'button', 'Guardar', 'btn btn-success', '0', '1');
-INSERT INTO `formularios_botones` VALUES ('14', 'frm_registro_usuario', 'btn_registrar', 'button', 'Registrar', 'btn btn-success', '0', '1');
-INSERT INTO `formularios_botones` VALUES ('15', 'frm_registro_usuario', 'btn_borrar', 'reset', 'borrar', 'btn btn-danger', '0', '2');
+INSERT INTO `formularios_botones` VALUES ('14', 'frm_registro_usuario', 'btn_registrar', 'button', 'Registrar', 'gg-button', '0', '1');
+INSERT INTO `formularios_botones` VALUES ('15', 'frm_registro_usuario', 'btn_borrar', 'reset', 'borrar', 'gg-button', '0', '2');
 INSERT INTO `formularios_botones` VALUES ('16', 'frm_perfil', 'actualizar', 'submit', 'Actualizar', 'gg-button', '0', '1');
-INSERT INTO `formularios_botones` VALUES ('17', 'frm_nsol', 'btn_generar', 'button', 'Generar', 'btn btn-success', '0', '1');
+INSERT INTO `formularios_botones` VALUES ('17', 'frm_nsol', 'btn_generar', 'submit', 'Generar', 'gg-button', '0', '1');
 INSERT INTO `formularios_botones` VALUES ('18', 'frm_producto', 'actualizar', 'submit', 'Actualizar', 'gg-button', '0', '1');
+INSERT INTO `formularios_botones` VALUES ('19', 'frm_psol', 'btn_generar', 'submit', 'Procesar', 'gg-button', '0', '1');
 
 -- ----------------------------
 -- Table structure for `formularios_campos`
@@ -1251,7 +1253,7 @@ CREATE TABLE `formularios_campos` (
   PRIMARY KEY (`id_campo`),
   KEY `fk_formularios_campos-formulario` (`id_formulario`) USING BTREE,
   CONSTRAINT `fk_formularios_campos-formulario` FOREIGN KEY (`id_formulario`) REFERENCES `formularios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of formularios_campos
@@ -1274,9 +1276,9 @@ INSERT INTO `formularios_campos` VALUES ('29', 'frm_perfil', 'text', 'Datos Basi
 INSERT INTO `formularios_campos` VALUES ('30', 'frm_perfil', 'select', 'Datos Basicos', 'tipo_usr', 'tipo_usr', 'Tipo de Usuario', '', '', ' ', '0', '0', '0', '2', 'usuarios_accesos', 'id_acceso');
 INSERT INTO `formularios_campos` VALUES ('31', 'frm_perfil', 'select', 'Datos Basicos', 'estatus', 'estatus', 'Estatus', '', '', ' ', '0', '0', '0', '3', 'estatus', 'id');
 INSERT INTO `formularios_campos` VALUES ('32', 'frm_perfil', 'hidden', 'Datos Basicos', 'form', 'form', '', 'actu-perfil', '', '', '0', '0', '0', '1', '', '');
-INSERT INTO `formularios_campos` VALUES ('33', 'frm_nsol', 'select', 'Solicitudes', 'slt_tipo', 'slt_tipo', 'Tipo solicitud', '', ' ', ' ', '1', '0', '0', '1', 'tipo_service', 'id');
-INSERT INTO `formularios_campos` VALUES ('34', 'frm_nsol', 'textarea', 'Solicitudes', 'text_obs', 'text_obs', 'Observacion', '', ' ', ' ', '1', '0', '0', '2', '', '');
-INSERT INTO `formularios_campos` VALUES ('35', 'frm_nsol', 'select', 'Solicitudes', 'slt_prod', 'slt_prod', 'Prod. Asociado', '', ' ', ' ', '1', '0', '0', '4', '', '');
+INSERT INTO `formularios_campos` VALUES ('33', 'frm_nsol', 'select', 'Solicitudes', 'slt_tipo', 'slt_tipo', 'Tipo solicitud', '', ' text', ' ', '1', '0', '0', '4', 'tipo_service', 'id');
+INSERT INTO `formularios_campos` VALUES ('34', 'frm_nsol', 'textarea', 'Solicitudes', 'text_obs', 'text_obs', 'Observacion', '', ' text', ' ', '1', '0', '0', '2', '', '');
+INSERT INTO `formularios_campos` VALUES ('35', 'frm_nsol', 'select', 'Solicitudes', 'slt_prod', 'slt_prod', 'Prod. Asociado', '', ' text', ' ', '1', '0', '0', '3', '', '');
 INSERT INTO `formularios_campos` VALUES ('194', 'frm_registro_usuario', 'hidden', '', 'form', 'form', '', 'registro-usuario1', '', '', '0', '0', '0', '0', '', '');
 INSERT INTO `formularios_campos` VALUES ('195', 'frm_perfil', 'hidden', 'Datos Basicos', 'perfil', 'perfil', '', '', '', '', '0', '0', '0', '1', '', '');
 INSERT INTO `formularios_campos` VALUES ('196', 'frm_filtro', 'text', 'Filtro:', 'txt_valor', 'f[1][v]', 'Valor', '', 'text vobli', '', '1', '0', '0', '3', '', '');
@@ -1290,6 +1292,12 @@ INSERT INTO `formularios_campos` VALUES ('208', 'frm_fproducto', 'text', 'Filtro
 INSERT INTO `formularios_campos` VALUES ('209', 'frm_fproducto', 'select', 'Filtro:', 'slt_filtro', 'f[1][c]', 'Filtro', '', 'text vobli', '', '1', '0', '0', '1', '', '');
 INSERT INTO `formularios_campos` VALUES ('210', 'frm_fproducto', 'hidden', 'Filtro:', 'tabla', 'tabla', '', 'productos', 'text', '', '0', '0', '0', '1', '', '');
 INSERT INTO `formularios_campos` VALUES ('211', 'frm_fproducto', 'select', 'Filtro:', 'operadores', 'f[1][o]', 'Operador', '', 'text', '', '1', '0', '0', '2', '', '');
+INSERT INTO `formularios_campos` VALUES ('212', 'frm_nsol', 'text', 'Solicitudes', 'txt_solicitante', 'txt_solicitante', 'Solicitante', '', ' text', '', '1', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('213', 'frm_nsol', 'hidden', 'Solicitudes', 'form', 'form', '', 'agregar-solicitud', ' text', '', '1', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('214', 'frm_psol', 'text', 'Solicitudes', 'txt_fecha_visita', 'txt_fecha_visita', 'Fecha de Inspeccion', '', ' fecha', ' ', '1', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('215', 'frm_psol', 'select', 'Solicitudes', 'slt_tecnico', 'slt_tecnico', 'Tecnico', '', ' text', ' ', '1', '0', '0', '2', 'tecnico', 'id');
+INSERT INTO `formularios_campos` VALUES ('216', 'frm_psol', 'hidden', 'Solicitudes', 'form', 'form', '', 'procesar-solicitud', ' text', '', '1', '0', '0', '1', '', '');
+INSERT INTO `formularios_campos` VALUES ('217', 'frm_psol', 'hidden', 'Solicitudes', 'solicitud', 'solicitud', '', 'procesar-solicitud', ' text', '', '1', '0', '0', '2', '', '');
 
 -- ----------------------------
 -- Table structure for `gen_case`
@@ -1306,13 +1314,14 @@ CREATE TABLE `gen_case` (
   `fecha_vis` date DEFAULT NULL,
   `tecnico` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of gen_case
 -- ----------------------------
-INSERT INTO `gen_case` VALUES ('1', '1', '2012-07-23 15:27:03', 'Revision y mantenimiento al sistema', '1', '17030621', '1', '2012-07-23', '1');
-INSERT INTO `gen_case` VALUES ('2', '1', '2012-07-31 14:34:18', 'Mantenimiento', '0', '16800475', '1', null, null);
+INSERT INTO `gen_case` VALUES ('1', '1', '2012-10-16 14:10:56', 'Revision y mantenimiento al sistema', '1', '17030621', '1', '2012-10-16', '1');
+INSERT INTO `gen_case` VALUES ('2', '1', '2012-10-16 14:10:56', 'Mantenimiento', '1', '16800475', '1', '2012-10-16', '1');
+INSERT INTO `gen_case` VALUES ('4', '1', '2012-10-16 14:10:56', 'prueba', '1', '17030621', '1', '2012-10-16', '1');
 
 -- ----------------------------
 -- Table structure for `menu`
@@ -1505,6 +1514,12 @@ INSERT INTO `usuarios_grupos_permisos` VALUES ('3', '3', '1111');
 INSERT INTO `usuarios_grupos_permisos` VALUES ('3', '4', '1111');
 
 -- ----------------------------
+-- View structure for `vclientes`
+-- ----------------------------
+DROP VIEW IF EXISTS `vclientes`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vclientes` AS (select `c`.`usr_cod` AS `usr_cod`,`c`.`nombre` AS `nombre`,`c`.`apellido` AS `apellido`,`p`.`nombre` AS `producto`,`p`.`id` AS `cod_producto` from (((`clientes` `c` join `usr_producto` `u`) join `usuarios_grupos` `g`) join `productos` `p`) where ((`c`.`usr_cod` = `u`.`usr_cod`) and (`u`.`id_grupo` = `g`.`id_grupo`) and (`u`.`cod_prod` = `p`.`id`))) ;
+
+-- ----------------------------
 -- View structure for `vconf_bas`
 -- ----------------------------
 DROP VIEW IF EXISTS `vconf_bas`;
@@ -1526,7 +1541,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for `vsol_pend`
 -- ----------------------------
 DROP VIEW IF EXISTS `vsol_pend`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vsol_pend` AS (select `t`.`nombre` AS `nombre`,`g`.`fecha_sol` AS `fecha_sol`,`g`.`observa` AS `observa`,`g`.`usr_cod` AS `usr_cod`,`g`.`cod_prod` AS `cod_prod`,`g`.`id` AS `id` from (`gen_case` `g` join `tipo_service` `t`) where ((`g`.`tipo_sol` = `t`.`id`) and (`g`.`estatus` = '0'))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vsol_pend` AS (select `g`.`id` AS `id`,`c`.`usr_cod` AS `usr_cod`,concat(`c`.`nombre`,' ',`c`.`apellido`) AS `nombre`,`g`.`fecha_sol` AS `fecha_sol`,`t`.`nombre` AS `servicio`,`g`.`observa` AS `observa`,`p`.`nombre` AS `producto` from (((`gen_case` `g` join `clientes` `c`) join `tipo_service` `t`) join `productos` `p`) where ((`g`.`usr_cod` = `c`.`usr_cod`) and (`t`.`id` = `g`.`tipo_sol`) and (`p`.`id` = `g`.`cod_prod`))) ;
 
 -- ----------------------------
 -- View structure for `vsol_proc`
