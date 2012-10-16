@@ -137,25 +137,68 @@ class servicio
        if ($estatus == '1'){ 
             if ($fecha && $tecnico && $estatus)
             {
-                $fecha = date($fecha);
-                $fecha_new = formatoFecha($fecha);
+                
+                $fecha_new = date('Y-m-d', strtotime($fecha));
                 $this->db = new db;
-                $procesar = $this->db->query("UPDATE gen_case SET fecha_vis = '$fecha_new', tecnico = '$tecnico', estatus = '$estatus'");
+                $actualizar = $this->db->query("UPDATE gen_case SET fecha_vis = '$fecha_new', tecnico = '$tecnico', estatus = '$estatus'");
                 if (!$this->db->errno)
                 {
+                     $this->mensaje = "Se Agregaron los Registros Correctamente";
+                    $this->msgTitle = "Datos de La solicitud";
+                    $this->msgTipo = "ok";
                     $this->estatus = true;
-                    $this->mensaje = "se actualizo el estatus de la solicitud";
-                    $this->msgTipo = "aviso";
                 }
             }
-       }else{
-           if ($estatus == '2')
-           {
-               echo "prueba";
-           }
-       }
+            }else{
+                if ($estatus == '2')
+                {
+                    echo "prueba";
+                }
+            }
        return $this->estatus;
     } 
+    
+    public function generar($txt_solicitante, $text_obs,$slt_prod, $slt_tipo)
+    {
+        $query = "insert into gen_case(usr_cod, observa, estatus, cod_prod, tipo_sol)VALUES('$txt_solicitante', '$text_obs','0','$slt_prod', '$slt_tipo')";
+            $actualiza = $this->db->query($query);
+            if(!$this->db->errno){
+                $this->mensaje = "Se Agregaron los Registros Correctamente";
+                $this->msgTitle = "Datos de La solicitud";
+                $this->msgTipo = "ok";
+                $this->estatus = true;
+            }else{
+                 $this->mensaje = "No se Pudieron guardar los Registros";
+                 $this->msgTipo = "error";
+                 $this->msgTitle = "Datos de La solicitud";
+                 $this->estatus = false;
+            }
+            
+            return $this->estatus;
+    }
+    
+    public function listar()
+    {
+         $consulta=$this->db->query("select * from vsol_pend");   
+            
+            if($consulta->num_rows==0)
+		{
+			$this->mensaje = "No se encontraron Noticias...";
+			$this->msgTipo = "aviso";
+			$this->estatus = false;
+			$this->json = json_encode($this);
+			return $this->estatus;
+		}
+            
+                    $this->datos = $consulta->all();
+                    $this->mensaje="Se Mostraron los datos correctamente";
+                    $this->msgTipo="ok";
+                    $this->estatus = true;
+                    $this->json = json_encode($this);
+               
+        
+    }        
+        
 }
 //$service = new servicio;
 //$service->procesadas();

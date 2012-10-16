@@ -10,6 +10,7 @@ require_once('../config.php');
 require_once("../lib/funciones.php");
 require_once '../lib/clases/usuario.class.php';
 require_once '../lib/clases/producto.class.php';
+require_once '../lib/clases/servicios.class.php';
 
 if(isset($_POST)&&count($_POST)){
 	$form_error = false;
@@ -37,6 +38,26 @@ if(isset($_POST)&&count($_POST)){
 
 			$error_redirect_to = 'producto.php';
 			$ty_redirect_to = 'producto.php';
+                    break;
+                case 'agregar-solicitud':
+                    $sol = new servicio;
+                    $sol->generar($txt_solicitante, $text_obs,$slt_prod, $slt_tipo);
+                        $_SESSION['mensaje']=$sol->mensaje;
+                        $_SESSION['msgTipo']=$sol->msgTipo;
+                        $_SESSION['msgTitle']=$sol->msgTitle;
+
+			$error_redirect_to = 'solicitud.php';
+			$ty_redirect_to = 'solicitud.php';
+                    break;
+                case 'procesar-solicitud':
+                    $sol = new servicio;
+                    $sol->procesar($txt_fecha_visita, $slt_tecnico, '1');
+                        $_SESSION['mensaje']=$sol->mensaje;
+                        $_SESSION['msgTipo']=$sol->msgTipo;
+                        $_SESSION['msgTitle']=$sol->msgTitle;
+
+                        $error_redirect_to = 'solicitud.php';
+                        $ty_redirect_to = 'solicitud.php';
                     break;
                 
                 default:

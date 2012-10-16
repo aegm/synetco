@@ -53,6 +53,11 @@
                     $clientes->listarClientes($id);
                     echo $clientes->json;
                     break;
+                case 'buscar-pro-clie':
+                    $clientes = new cliente;
+                    $clientes->listarClientesProductos($identificacion);
+                    echo $clientes->json;
+                    break;
                
                 
 	}

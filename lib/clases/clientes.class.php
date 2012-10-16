@@ -54,12 +54,12 @@ class cliente {
     }
     public function listarClientes()
     {
-        $this->msgTitle="Usuario - buscar";
+        $this->msgTitle="Cliente - buscar";
 		
 		if($limite)
 		$limite="LIMIT $limite";
 		$buscar = str_replace(" ","%",$buscar);
-                $lista = $this->db->query("SELECT * from vclientes");
+                $lista = $this->db->query("SELECT * from vclientes where usr_cod like '$buscar%'");
 		if(!$lista->num_rows)
 		{
 			$this->mensaje = "No se encontraron registros...";
@@ -77,6 +77,22 @@ class cliente {
 		$this->estatus = true;
 		$this->json = json_encode($this);
 		return $this->estatus;
+                
+    }
+    public function listarClientesProductos($id)
+    {
+         if ($id)
+            $completar_sql = "where u.usr_cod = $id";
+        
+                $consultar = $this->db->query("select u.cod_prod, p.nombre  from usr_producto u, productos p $completar_sql and u.cod_prod = p.id");
+                while($clie = $consultar->fetch_assoc())
+                {
+                    $this->datos[] = $clie;
+                    $this->estatus = true;
+                }
+                
+                $this->json = json_encode($this);
+                return $this->estatus;
                 
     }
 }
